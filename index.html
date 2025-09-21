@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Weather with AI </title>
+    <title>WeatherWise - Student Life Companion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -143,7 +143,7 @@
             background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 25px;
+            padding: 37px;
             overflow: hidden;
             position: relative;
             transform-style: preserve-3d;
@@ -438,6 +438,131 @@
             color: #4a6fa5;
         }
         
+        /* New Features Styling */
+        .features-tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .feature-tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            text-align: center;
+            flex: 1;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .feature-tab.active {
+            border-bottom: 3px solid #4a6fa5;
+            color: #4a6fa5;
+            font-weight: 600;
+        }
+        
+        .feature-tab:hover {
+            background: rgba(74, 111, 165, 0.1);
+        }
+        
+        .feature-content {
+            display: none;
+            padding: 20px 0;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .feature-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .food-suggestion {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .food-icon {
+            font-size: 24px;
+            color: #ff9800;
+            margin-right: 10px;
+        }
+        
+        .food-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .food-description {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .student-tip {
+            background: rgba(74, 111, 165, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .tip-icon {
+            font-size: 24px;
+            color: #4a6fa5;
+            margin-right: 10px;
+        }
+        
+        .tip-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .tip-description {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .lifecycle-checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .lifecycle-checkbox input {
+            margin-right: 10px;
+        }
+        
+        .lifecycle-label {
+            font-size: 14px;
+        }
+        
+        .progress-container {
+            height: 10px;
+            background: #f1f1f1;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #4a6fa5, #26d0ce);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+        
         @media (max-width: 480px) {
             .container {
                 padding: 15px;
@@ -449,6 +574,14 @@
             
             .details {
                 grid-template-columns: 1fr;
+            }
+            
+            .features-tabs {
+                flex-direction: column;
+            }
+            
+            .feature-tab {
+                margin-bottom: 5px;
             }
         }
     </style>
@@ -533,6 +666,58 @@
             </div>
         </div>
         
+        <!-- New Features Section -->
+        <div class="features-tabs">
+            <div class="feature-tab active" data-tab="food">Food Suggestions</div>
+            <div class="feature-tab" data-tab="student">Student Life</div>
+            <div class="feature-tab" data-tab="lifecycle">Study Progress</div>
+        </div>
+        
+        <div class="feature-content active" id="food-content">
+            <div class="food-suggestion">
+                <i class="fas fa-utensils food-icon"></i>
+                <div class="food-info">
+                    <p class="food-title" id="food-title">Weather-appropriate food suggestions</p>
+                    <p class="food-description" id="food-description">Based on current weather conditions</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="feature-content" id="student-content">
+            <div class="student-tip">
+                <i class="fas fa-graduation-cap tip-icon"></i>
+                <div class="tip-info">
+                    <p class="tip-title" id="student-tip-title">Student Life Tip</p>
+                    <p class="tip-description" id="student-tip-description">Personalized advice for your college life</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="feature-content" id="lifecycle-content">
+            <h3>Study Progress Tracker</h3>
+            <div class="lifecycle-checkbox">
+                <input type="checkbox" id="task1">
+                <label class="lifecycle-label" for="task1">Complete assignments</label>
+            </div>
+            <div class="lifecycle-checkbox">
+                <input type="checkbox" id="task2">
+                <label class="lifecycle-label" for="task2">Study for exams</label>
+            </div>
+            <div class="lifecycle-checkbox">
+                <input type="checkbox" id="task3">
+                <label class="lifecycle-label" for="task3">Group project work</label>
+            </div>
+            <div class="lifecycle-checkbox">
+                <input type="checkbox" id="task4">
+                <label class="lifecycle-label" for="task4">Research paper</label>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+            </div>
+            <p class="progress-text" id="progress-text">0% Complete</p>
+        </div>
+        
         <div class="error-message" id="error-message">
             <i class="fas fa-exclamation-circle"></i>
             <p>City not found. Please try again.</p>
@@ -560,6 +745,17 @@
         const suggestions = document.getElementById('suggestions');
         const aiRecommendation = document.getElementById('ai-recommendation');
         const aiText = document.getElementById('ai-text');
+        
+        // New feature elements
+        const featureTabs = document.querySelectorAll('.feature-tab');
+        const featureContents = document.querySelectorAll('.feature-content');
+        const foodTitle = document.getElementById('food-title');
+        const foodDescription = document.getElementById('food-description');
+        const studentTipTitle = document.getElementById('student-tip-title');
+        const studentTipDescription = document.getElementById('student-tip-description');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const taskCheckboxes = document.querySelectorAll('.lifecycle-checkbox input');
         
         // Weather effect elements
         const rainEffect = document.getElementById('rain-effect');
@@ -710,6 +906,102 @@
             return recommendation;
         }
         
+        // Generate food suggestion based on weather
+        function generateFoodSuggestion(condition, temp) {
+            let foodSuggestion = "";
+            let foodTitleText = "";
+            
+            if (condition.includes('rain') || condition.includes('cold')) {
+                foodTitleText = "Comfort Food Recommendation";
+                if (temp < 10) {
+                    foodSuggestion = "Hot soup or stew would be perfect! Try a hearty vegetable soup or chicken noodle to warm you up.";
+                } else {
+                    foodSuggestion = "A warm bowl of oatmeal or hot chocolate would be comforting on this rainy day.";
+                }
+            } else if (condition.includes('sunny') || condition.includes('clear')) {
+                foodTitleText = "Refreshing Meal Idea";
+                if (temp > 25) {
+                    foodSuggestion = "A fresh salad or cold pasta would be refreshing. Don't forget to stay hydrated with plenty of water!";
+                } else {
+                    foodSuggestion = "A grilled sandwich or wrap would be perfect for this pleasant weather.";
+                }
+            } else if (condition.includes('cloud')) {
+                foodTitleText = "Balanced Meal Suggestion";
+                foodSuggestion = "How about a balanced meal with protein, carbs and veggies? A rice bowl with grilled chicken and steamed vegetables would be ideal.";
+            } else if (condition.includes('snow')) {
+                foodTitleText = "Warming Winter Food";
+                foodSuggestion = "Hot cocoa or tea with some baked goods would be perfect. For a meal, consider a hot pot or fondue to share with friends.";
+            } else {
+                foodTitleText = "Weather-Appropriate Nutrition";
+                foodSuggestion = "Focus on a balanced diet with seasonal fruits and vegetables to keep your energy levels consistent.";
+            }
+            
+            return { title: foodTitleText, description: foodSuggestion };
+        }
+        
+        // Generate student tip based on weather and time
+        function generateStudentTip(condition, temp, isDay) {
+            let tipTitle = "";
+            let tipDescription = "";
+            
+            const dayOfWeek = new Date().getDay();
+            const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+            
+            if (condition.includes('rain') || condition.includes('snow')) {
+                tipTitle = "Indoor Study Session";
+                tipDescription = "Perfect weather for focusing on your studies. Find a cozy spot in the library or your dorm to get some work done.";
+            } else if (condition.includes('sunny') && temp > 20) {
+                tipTitle = "Outdoor Study Option";
+                tipDescription = "Great weather for studying outside! Find a shady spot on campus to get some fresh air while you work.";
+            } else if (isWeekend) {
+                tipTitle = "Weekend Balance";
+                tipDescription = "Remember to balance studying with relaxation. Schedule breaks to avoid burnout during the weekend.";
+            } else {
+                tipTitle = "Effective Study Strategy";
+                tipDescription = "Try the Pomodoro technique: 25 minutes of focused study followed by a 5-minute break. Repeat 4 times then take a longer break.";
+            }
+            
+            return { title: tipTitle, description: tipDescription };
+        }
+        
+        // Update progress bar based on checked tasks
+        function updateProgressBar() {
+            const totalTasks = taskCheckboxes.length;
+            let completedTasks = 0;
+            
+            taskCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    completedTasks++;
+                }
+            });
+            
+            const progressPercentage = (completedTasks / totalTasks) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${Math.round(progressPercentage)}% Complete`;
+            
+            // Save progress to localStorage
+            const progressData = [];
+            taskCheckboxes.forEach(checkbox => {
+                progressData.push({ id: checkbox.id, checked: checkbox.checked });
+            });
+            localStorage.setItem('studyProgress', JSON.stringify(progressData));
+        }
+        
+        // Load progress from localStorage
+        function loadProgress() {
+            const progressData = JSON.parse(localStorage.getItem('studyProgress'));
+            
+            if (progressData) {
+                progressData.forEach(item => {
+                    const checkbox = document.getElementById(item.id);
+                    if (checkbox) {
+                        checkbox.checked = item.checked;
+                    }
+                });
+                updateProgressBar();
+            }
+        }
+        
         // Get weather data from API
         async function getWeatherData(city, unit = 'c') {
             try {
@@ -794,6 +1086,16 @@
             );
             aiText.textContent = recommendation;
             aiRecommendation.style.display = 'flex';
+            
+            // Generate and show food suggestion
+            const foodSuggestion = generateFoodSuggestion(weatherCondition, temp);
+            foodTitle.textContent = foodSuggestion.title;
+            foodDescription.textContent = foodSuggestion.description;
+            
+            // Generate and show student tip
+            const studentTip = generateStudentTip(weatherCondition, temp, isDay);
+            studentTipTitle.textContent = studentTip.title;
+            studentTipDescription.textContent = studentTip.description;
         }
         
         // Update forecast cards
@@ -909,6 +1211,27 @@
             }
         }
         
+        // Switch between feature tabs
+        function switchTab(tabName) {
+            // Update tabs
+            featureTabs.forEach(tab => {
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Update content
+            featureContents.forEach(content => {
+                if (content.id === `${tabName}-content`) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+        }
+        
         // Event Listeners
         searchBtn.addEventListener('click', () => {
             if (cityInput.value.trim() !== '') {
@@ -935,9 +1258,24 @@
         
         favoriteBtn.addEventListener('click', toggleFavorite);
         
+        // Feature tab event listeners
+        featureTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                switchTab(tab.dataset.tab);
+            });
+        });
+        
+        // Task checkbox event listeners
+        taskCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgressBar);
+        });
+        
         // Initialize app
         updateDateTime();
         setInterval(updateDateTime, 60000); // Update time every minute
+        
+        // Load progress from localStorage
+        loadProgress();
         
         // Load initial weather data for default city
         getWeatherData('New York', currentUnit);
